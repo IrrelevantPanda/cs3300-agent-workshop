@@ -25,7 +25,19 @@ def implement_feature(issue: str, plan: dict, file_contents: str, memory_context
         """
 
     prompt += """
-    Write the code required to implement the feature strictly adhering to coding guidelines and existing code structure. Return a JSON object with:
+    Write the code required to implement the feature strictly adhering to coding guidelines and existing code structure.
+
+    IMPORTANT: Every file_path in your edits MUST use one of these exact repository-relative paths:
+    - app.py
+    - static/app.js
+    - static/style.css
+    - templates/index.html
+    - tests/test_app.py
+
+    Never use bare filenames such as test_app.py, app.js, or index.html.
+    Do not edit files outside this list.
+
+    Return a JSON object with:
     1. "edits": A list of objects containing "file_path" and "content" (providing the fully updated file content, not just a diff).
     2. "summary": A brief description of the code changes.
     """
